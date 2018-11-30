@@ -3,7 +3,6 @@ class Solution:
     def food_ratio_distribution(self, ratios, portions):
         if ratios is None or len(ratios) <=0 or not isinstance(ratios, dict):
             print("Enter a valid ratio")
-
         if portions < 0:
             print('Enter a valid Portion')
 
@@ -17,22 +16,22 @@ class Solution:
         if denominator <= 0:
             return result_distribution
 
-        largestRemainder = denominator/portions
-        allocatedPortion = 0
+        greater_remainder = denominator/portions
+        portion_allocated = 0
 
         for key, value in ratios.items():
-            autoPortion = ratios[key]/largestRemainder
-            result_distribution[key] = int(autoPortion)
-            portions_remaining[key] = autoPortion - result_distribution[key]
-            allocatedPortion += result_distribution[key]
+            portion_by_ratio = ratios[key]/greater_remainder
+            result_distribution[key] = int(portion_by_ratio)
+            portions_remaining[key] = portion_by_ratio - result_distribution[key]
+            portion_allocated += result_distribution[key]
 
-        remainderPortion = portions - allocatedPortion
+        portion_remaining = portions - portion_allocated
 
         # Split left over portions
-        for i in range(0, remainderPortion):
+        for i in range(0, portion_remaining):
             max = 0
             max_index = 0
-            for key,value in ratios.items():
+            for key, value in ratios.items():
                 if portions_remaining[key] > max:
                     max = portions_remaining[key]
                     max_index = key
